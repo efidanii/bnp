@@ -1,0 +1,16 @@
+@media screen and (max-width: 991px){
+    .live-results-table-wrapper {
+        margin: 0 20px 50px 20px;
+    }
+    .noUi-value{
+        font-size: 12px;
+    }
+    }
+    @media screen and (max-width: 1230px){
+        .row_reviews{
+            flex-direction: column;
+        }
+        .block__review{
+            width: 100%;
+        }
+    }

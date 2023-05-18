@@ -1,0 +1,9 @@
+@font-face {
+    font-family: 'Bunday Clean Up';
+    src: local('Bunday Clean Up SemiBold Up'), local('Bunday-Clean-Up-SemiBold-Up'),
+        url('BundayClean-SemiBoldUp.woff2') format('woff2'),
+        url('BundayClean-SemiBoldUp.woff') format('woff'),
+        url('BundayClean-SemiBoldUp.ttf') format('truetype');
+    font-weight: 600;
+    font-style: normal;
+  }

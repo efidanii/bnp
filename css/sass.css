@@ -1,0 +1,49 @@
+.testimonial-hover-text {
+  background-color: rgba(3, 167, 118, 0.5);
+}
+
+.bg-secondary {
+  background-color: #03a776;
+}
+
+.bg-primary {
+  background-color: #03a776;
+  color: #fff;
+}
+
+.profitCounter {
+  background-color: #f4f4f4;
+}
+
+.noUi-tooltip, .noUi-connect {
+  background-color: #03a776;
+}
+
+.noUi-tooltip {
+  border: 1px solid #03a776;
+}
+
+.noUi-horizontal .noUi-handle {
+  border: 4px solid #03a776;
+}
+
+.action-title {
+  color: #03a776;
+}
+
+.second-color {
+  background: #f4f4f4;
+}
+
+footer {
+  background-color: rgb(30, 30, 30);
+}
+
+form.form-container button[type=submit], .yellow-btn, .yellow-btn-reviews, .bg-btn-primary {
+  background-color: #03a776;
+  color: #fff;
+}
+
+.dark-purple, .testimonials-header {
+  color: #000;
+}/*# sourceMappingURL=sass.css.map */

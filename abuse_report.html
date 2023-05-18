@@ -1,0 +1,350 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Report Abuse/Spam</title>
+    <link rel="shortcut icon" href="favicon.ico">
+    <style>
+        body {
+            background: rgba(0, 0, 0, 0.7);
+            margin: 0;
+            height: 100vh;
+        }
+
+        .form-contact-us,
+        .form-contact-us * {
+            margin: 0;
+            padding: 0;
+            outline: 0;
+            box-sizing: border-box;
+            text-indent: 0;
+            text-align: left;
+            font-family: sans-serif;
+        }
+
+        .form-contact-us .input-holder {
+            margin-bottom: 10px;
+        }
+
+        .form-contact-us .input {
+            -webkit-appearance: none;
+            border: 1px solid #ccc;
+            border-radius: 2px;
+            padding: 5px;
+            margin: 0;
+            background-color: #fff;
+            display: block;
+            width: 100%;
+        }
+
+        .form-contact-us .select {
+            border: 1px solid #ccc;
+            border-radius: 2px;
+            padding: 5px;
+            margin: 0;
+            display: block;
+            width: 100%;
+            background: #fff;
+        }
+
+        .form-contact-us .textarea {
+            border: 1px solid #ccc;
+            border-radius: 2px;
+            padding: 5px;
+            margin: 0;
+            resize: vertical;
+            display: block;
+            width: 100%;
+            min-height: 100px;
+        }
+
+        .form-contact-us .btn-submit-holder {
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .form-contact-us .btn-submit {
+            text-transform: uppercase;
+            font-size: 14px;
+            display: inline-block;
+            min-width: 88px;
+            padding: 8px 16px;
+            line-height: 1.42857143;
+            text-align: center;
+            white-space: nowrap;
+            vertical-align: middle;
+            -ms-touch-action: manipulation;
+            touch-action: manipulation;
+            cursor: pointer;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            border: 0;
+            border-radius: 2px;
+            background: #337ab7;
+            color: #fff;
+            transition: all 0.2s linear;
+        }
+
+        .form-contact-us .btn-submit:hover {
+            background: #265a87;
+        }
+
+        .modal-holder {
+            z-index: 200;
+            font-family: sans-serif;
+            height: 100%;
+            display: grid;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-holder .modal {
+            max-width: 700px;
+            width: 100%;
+            border-radius: 5px;
+            background-color: #fff;
+            color: #000;
+        }
+
+        .modal-holder .modal-title {
+            padding: 15px;
+            font-size: 18px;
+            border-bottom: 1px solid #ccc;
+        }
+
+
+        .modal-holder .modal-body {
+            padding: 15px;
+            word-wrap: break-word;
+        }
+
+        .loader-holder {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 50;
+            display: none;
+            border-radius: 5px;
+        }
+
+        .loader-holder .lds-dual-ring {
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .loader-holder .lds-dual-ring:after {
+            content: " ";
+            display: block;
+            width: 46px;
+            height: 46px;
+            margin: 1px;
+            border-radius: 50%;
+            border: 5px solid #fff;
+            border-color: #fff transparent #fff transparent;
+            animation: lds-dual-ring 1.2s linear infinite;
+        }
+
+        @keyframes lds-dual-ring {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .modal-contact-us .text-top {
+            margin-bottom: 40px;
+        }
+
+        @media screen and (max-width: 699px) {
+            .modal-contact-us .text-top {
+                margin-bottom: 20px;
+            }
+
+            .form-contact-us .textarea {
+                min-height: 90px;
+            }
+
+            body {
+                background: unset;
+            }
+
+            .loader-holder {
+                border-radius: 0;
+            }
+
+            .modal-holder .modal {
+                border-radius: 0;
+            }
+
+            .modal-thanks svg {
+                max-width: 110px !important;
+            }
+
+            .basic-message-layout-holder {
+                padding: 30px 0 !important;
+                margin-top: 0 !important;
+            }
+
+            .modal-thanks .modal-holder .modal-body {
+                padding: 10px !important;
+            }
+
+            .modal-thanks .modal-title {
+                text-align: center;
+            }
+
+        }
+
+        .modal-holder .modal-thanks {
+            max-width: 600px;
+        }
+
+        form:invalid button.btn-submit {
+            opacity: 0.6;
+        }
+
+        form:valid button.btn-submit {
+            opacity: 1;
+        }
+
+        .modal-thanks {
+            display: none;
+        }
+
+        .basic-message-layout-holder {
+            text-align: center;
+            padding: 10px 50px;
+        }
+
+    </style>
+</head>
+<body>
+<div class="modal-holder modal-contact-us">
+    <div class="modal modal-form">
+        <div class="modal-header">
+            <div class="modal-title">Report Abuse</div>
+        </div>
+        <div class="modal-body">
+            <div class="text-top">
+                The website <script>document.write(location.hostname.replace(/[a-z]{2}\./, ''))</script> is used as a marketing material to promote advertisers by third party promoters, affiliates, affiliate networks and ad networks.
+                <br><br>
+                Anyone promoting this website is prohibited from using spam, spyware, incentivization, denial of service, use of wrong/false marketing material, your identity was used in prelanders prior for you reaching this page and any other illegal activity and is obligated to apply all local laws and regulations including GDPR rules and including DMCA rules where the users are sent from.
+                <br><br>
+                If you have come to <script>document.write(location.hostname.replace(/[a-z]{2}\./, ''))</script> as a result of abuse activity (mentioned above or any other which is not), please complete the form below to report the issue. We carefully examine every abuse report and we take action against the promoters.
+            </div>
+            <form id="form" method="POST" name="сontact_us" class="form-contact-us">
+                <div class="input-holder input-holder-first-name">
+                    <input class="input" type="text" name="first_name" placeholder="First Name" required=""
+                           value="">
+                </div>
+                <div class="input-holder input-holder-last-name">
+                    <input class="input" type="text" name="last_name" placeholder="Last Name" required
+                           value="">
+                </div>
+                <div class="input-holder input-holder-email">
+                    <input class="input" type="email" name="email" placeholder="Email" required value="">
+                </div>
+                <div class="input-holder input-holder-type">
+                    <select class="select" name="type" required value="" title="Type">
+                        <option value="General Inquiries">General Inquiries</option>
+                        <option value="Technical Support">Technical Support</option>
+                        <option value="Spam/GDPR">Spam/GDPR</option>
+                        <option value="Misleading Content">Misleading Content</option>
+                        <option value="Incentivising">Incentivising</option>
+                        <option value="Malware">Malware</option>
+                        <option value="Inappropriate">Inappropriate</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                <div class="input-holder input-holder-subject">
+                    <input class="input" type="text" name="subject" placeholder="Subject" required value="">
+                </div>
+                <div class="input-holder input-holder-message">
+                    <div class="textarea-holder">
+                        <textarea class="textarea" name="message" placeholder="Message" required></textarea>
+                    </div>
+                </div>
+                <div class="btn-submit-holder">
+                    <button type="submit" class="btn-submit" id="send_button">Send</button>
+                </div>
+                <div class="loader-holder">
+                    <div class="lds-dual-ring"></div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="modal modal-thanks">
+        <div class="modal-header">
+            <div class="modal-title">The message has been sent successfully</div>
+        </div>
+        <div class="modal-body">
+            <svg style="max-width: 130px;display: flex;margin: auto;" fill="green" xmlns="http://www.w3.org/2000/svg"
+                 viewBox="0 0 384 384">
+                <path d="M275.312 140.688a16 16 0 0 0-22.624 0L184 209.368l-28.688-28.68a16 16 0 0 0-22.624 22.624l40 40C175.808 246.44 179.904 248 184 248s8.192-1.56 11.312-4.688l80-80a16 16 0 0 0 0-22.624zM368 176a16.01 16.01 0 0 0-16 16c0 88.224-71.776 160-160 160S32 280.224 32 192 103.776 32 192 32c42.952 0 83.272 16.784 113.544 47.264 6.216 6.28 16.352 6.312 22.624.08a16 16 0 0 0 .08-22.624C291.928 20.144 243.536 0 192 0 86.128 0 0 86.128 0 192s86.128 192 192 192 192-86.128 192-192a16.01 16.01 0 0 0-16-16z"/>
+            </svg>
+            <div class="basic-message-layout-holder" style="margin-top: 20px;">
+                <div>
+                    Your support ticket has been sent successfully. <br>
+                    Once we respond, you will receive an email notification from
+                    <script>document.write('noreply@' + location.hostname.replace(/[a-z]{2}\./, ''))</script>.
+                    Make sure you check your spam/junk folders.
+                    <br>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    function hiddenInput(name, value) {
+        const inputName = document.createElement("input");
+        inputName.setAttribute("type", "hidden");
+        inputName.setAttribute("name", name);
+        inputName.setAttribute("value", value ? value : '');
+        document.getElementById("form").appendChild(inputName);
+    }
+    const getAffId = /(?:aff_id=|affiliate_id=)([^&]+)/.exec(document.referrer);
+
+    hiddenInput('current_url', window.location.host)
+    hiddenInput('affiliate_id', getAffId ? getAffId[1] : '')
+form.onsubmit = (e) => {
+        e.preventDefault();
+        const data = new FormData(form);
+        var object = {};
+        data.forEach((value, key) => {
+            object[key] = value
+        });
+        fetch('/abuse_report', {
+            method: 'POST',
+            body: JSON.stringify(object),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+            // .then(res => res.json())
+            // .then(text => console.log(text))
+        document.querySelector('.loader-holder').style.display = 'block';
+        setTimeout(() => {
+            document.querySelector('.modal-form').style.display = 'none';
+            document.querySelector('.modal-thanks').style.display = 'block';
+        }, 1000)
+    };
+</script>
+</body>
+</html>
